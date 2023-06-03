@@ -1,0 +1,15 @@
+service: city-service
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  profile: personal
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
