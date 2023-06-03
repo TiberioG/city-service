@@ -1,15 +1,34 @@
 service: city-service
 frameworkVersion: '3'
 
+#todo add stage dev, prod, staging
+params:
+  default:
+    region: eu-central-1
+    profile: personal
+
 provider:
   name: aws
   runtime: python3.9
-  profile: personal
+  profile: ${param:profile}
+  region: ${param:region}
+
+  environment:
+    AWS_REGION: ${param:region}
 
 functions:
-  hello:
-    handler: handler.hello
+  getCity:
+    handler: src/interfaces/get_city.handler
     events:
       - httpApi:
           path: /
           method: get
+  getDistance:
+    handler: src/interfaces/get_distance.handler
+    events:
+      - httpApi:
+          path: /
+          method: post
+
+plugins:
+  - serverless-offline

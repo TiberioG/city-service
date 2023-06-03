@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "start:local": "sls offline"
+  },
+  "devDependencies": {
+    "serverless-offline": "^12.0.4"
+  }
+}

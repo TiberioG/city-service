@@ -6,6 +6,9 @@ authors = ["Tiberio <tiberio.galbiati@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+boto3 = "^1.26.146"
+requests = "^2.31.0"
+haversine = "^2.8.0"
 
 [tool.poetry.dev-dependencies]
 

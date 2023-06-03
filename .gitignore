@@ -20,3 +20,4 @@ var/
 .serverless
 /.idea/*
 /city-service.iml
+/node_modules/
