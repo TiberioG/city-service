@@ -51,4 +51,6 @@ package:
 custom:
   pythonRequirements:
     usePoetry: true
-    zip: true
+    dockerizePip: non-linux
+    slim: true
+    invalidateCaches: true

@@ -91,10 +91,3 @@ pytest
 
 This project follows a simple architecture inspired by Domain-Driven Design (DDD) principles. The serverless framework is utilized for deployment and orchestration, while AWS Lambda serves as the compute provider. The Serverless Python Requirements plugin is used to handle Python dependencies.
 
-## Contributing
-
-Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for more information.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).

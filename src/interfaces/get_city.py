@@ -4,7 +4,6 @@ from src.application.city_service import get_city_by_name
 
 
 def handler(event, context):
-    print(event)
 
     city_name = event.get('queryStringParameters').get('name')
 

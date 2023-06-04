@@ -5,7 +5,6 @@ from src.application.distance_service import haversine_two_cities_km
 
 def handler(event, context):
     try:
-        print(event)
         body = json.loads(event['body'])
 
         res = haversine_two_cities_km(body.get('city1'), body.get('city2'))

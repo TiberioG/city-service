@@ -5,7 +5,7 @@ from src.application.city_service import get_city_by_name
 
 def city_to_coordinates(city_dict) -> tuple[float, float]:
     """
-    :param city_dict: todo
+    :param city_dict: todo create model and type
     :return: tuple with latitude and longitude
     """
     return city_dict.get('latitude'), city_dict.get('longitude')
