@@ -23,7 +23,7 @@ provider:
     cors: true
 functions:
   getCity:
-    handler: src/interfaces/get_city.handler
+    handler: src/interfaces/get_cities.handler
     events:
       - httpApi:
           path: /city

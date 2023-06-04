@@ -15,3 +15,11 @@ def get_city_by_name(name: str) -> dict | None:
 
     except Exception as e:
         return None
+
+def get_cities(query: str) -> list[dict] | None:
+    try:
+        res = call_city_api(query, limit=20)
+        return res
+
+    except Exception as e:
+        return None
