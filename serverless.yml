@@ -43,5 +43,4 @@ plugins:
 custom:
   pythonRequirements:
     usePoetry: true
-    dockerizePip: non-linux
-    slim: true
+    zip: true
