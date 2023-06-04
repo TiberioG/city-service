@@ -21,3 +21,5 @@ var/
 /.idea/*
 /city-service.iml
 /node_modules/
+/.requirements.zip
+/test/.pytest_cache/

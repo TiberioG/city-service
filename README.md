@@ -1,101 +1,100 @@
-<!--
-title: 'AWS Simple HTTP Endpoint example in Python'
-description: 'This template demonstrates how to make a simple HTTP API with Python running on AWS Lambda and API Gateway using the Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: python
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# City Service - Serverless AWS Lambda
 
-# Serverless Framework Python HTTP API on AWS
+This repository hosts a serverless backend service built with AWS Lambda. It offers two key features:
 
-This template demonstrates how to make a simple HTTP API with Python running on AWS Lambda and API Gateway using the Serverless Framework.
+1. Retrieving information about a specific city
+2. Calculating the distance between two cities
 
-This template does not include any kind of persistence (database). For more advanced examples, check out the [serverless/examples repository](https://github.com/serverless/examples/)  which includes DynamoDB, Mongo, Fauna and other examples.
+## API Endpoints
 
-## Usage
+There are two main endpoints:
 
-### Deployment
-
+**1. Retrieve City Information:**
 ```
-$ serverless deploy
+GET /city?name=<city_name>
 ```
+Returns data about a city specified in the query string.
 
-After deploying, you should see output similar to:
-
-```bash
-Deploying aws-python-http-api-project to stage dev (us-east-1)
-
-✔ Service deployed to stack aws-python-http-api-project-dev (140s)
-
-endpoint: GET - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/
-functions:
-  hello: aws-python-http-api-project-dev-hello (2.3 kB)
+**2. Calculate Distance Between Cities:**
 ```
-
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/).
-
-### Invocation
-
-After successful deployment, you can call the created application via HTTP:
-
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
+POST /distance
 ```
-
-Which should result in response similar to the following (removed `input` content for brevity):
-
+Accepts a JSON body with the names of two cities, and returns the distance between them.
+Example request body:
 ```json
 {
-  "message": "Go Serverless v3.0! Your function executed successfully!",
-  "input": {
-    ...
-  }
+    "city1": "<city_name_1>",
+    "city2": "<city_name_2>"
 }
 ```
+## Function Names
 
-### Local development
+For local invocation via AWS SDK, the function names are:
 
-You can invoke your function locally by using the following command:
+* `getCity`: city-service-dev-getCity
+* `getDistance`: city-service-dev-getDistance
+
+## Getting Started
+
+### Prerequisites
+
+* [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/)
+* [Serverless Framework](https://www.serverless.com/)
+* [AWS CLI](https://aws.amazon.com/cli/) configured with your AWS credentials
+* [Yarn](https://yarnpkg.com/)
+* [Poetry](https://python-poetry.org/)
+
+### Installation
+
+1. Install the Serverless Framework globally:
+    ```bash
+    npm install -g serverless
+    ```
+
+2. Install the project dependencies:
+    ```bash
+    yarn install
+    ```
+
+3. Install the Python dependencies via Poetry:
+    ```bash
+    poetry install
+    ```
+
+Don't forget to set the right env as interpreter in your IDE.
+## Local Development
+
+To run the service locally, ensure the [serverless-offline](https://www.serverless.com/plugins/serverless-offline) plugin is installed. Then, use the command:
 
 ```bash
-serverless invoke local --function hello
+yarn sls offline
 ```
+This will start the service on port 3000.
 
-Which should result in response similar to the following:
+## Deployment
 
-```
-{
-  "statusCode": 200,
-  "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
-}
-```
-
-Alternatively, it is also possible to emulate API Gateway and Lambda locally by using `serverless-offline` plugin. In order to do that, execute the following command:
+To deploy the service to AWS, run:
 
 ```bash
-serverless plugin install -n serverless-offline
+yarn sls deploy
 ```
 
-It will add the `serverless-offline` plugin to `devDependencies` in `package.json` file as well as will add it to `plugins` in `serverless.yml`.
+## Testing
 
-After installation, you can start local emulation with:
-
-```
-serverless offline
-```
-
-To learn more about the capabilities of `serverless-offline`, please refer to its [GitHub repository](https://github.com/dherault/serverless-offline).
-
-### Bundling dependencies
-
-In case you would like to include 3rd party dependencies, you will need to use a plugin called `serverless-python-requirements`. You can set it up by running the following command:
+To execute the (small) test suite, run:
 
 ```bash
-serverless plugin install -n serverless-python-requirements
+pytest
 ```
 
-Running the above will automatically add `serverless-python-requirements` to `plugins` section in your `serverless.yml` file and add it as a `devDependency` to `package.json` file. The `package.json` file will be automatically created if it doesn't exist beforehand. Now you will be able to add your dependencies to `requirements.txt` file (`Pipfile` and `pyproject.toml` is also supported but requires additional configuration) and they will be automatically injected to Lambda package during build process. For more details about the plugin's configuration, please refer to [official documentation](https://github.com/UnitedIncome/serverless-python-requirements).
+## Architecture
+
+This project follows a simple architecture inspired by Domain-Driven Design (DDD) principles. The serverless framework is utilized for deployment and orchestration, while AWS Lambda serves as the compute provider. The Serverless Python Requirements plugin is used to handle Python dependencies.
+
+## Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for more information.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

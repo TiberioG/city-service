@@ -8,6 +8,7 @@ def get_city_by_name(name: str) -> dict | None:
     try:
         res = call_city_api(name)
         # this api returns a list of cities, we just want the first one
+        # todo check if this is the best way to handle this
         res = res[0] if len(res) > 0 else None
 
         return res

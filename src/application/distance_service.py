@@ -3,6 +3,18 @@ from haversine import haversine, Unit
 from src.application.city_service import get_city_by_name
 
 
+def city_to_coordinates(city_dict) -> tuple[float, float]:
+    """
+    :param city_dict: todo
+    :return: tuple with latitude and longitude
+    """
+    return city_dict.get('latitude'), city_dict.get('longitude')
+
+
+def haversine_distance(coord1: tuple[float, float], coord2: tuple[float, float], unit: Unit) -> float:
+    return haversine(coord1, coord2, unit=unit)
+
+
 def haversine_two_cities_km(city_name_1, city_name_2) -> float:
     """
     :param city_name_1:
@@ -16,11 +28,11 @@ def haversine_two_cities_km(city_name_1, city_name_2) -> float:
     if city2 is None:
         raise Exception(f'City {city_name_2} not found')
 
-    city1_coordinates = (city1.get('latitude'), city1.get('longitude'))
-    city2_coordinates = (city2.get('latitude'), city2.get('longitude'))
+    city1_coordinates = city_to_coordinates(city1)
+    city2_coordinates = city_to_coordinates(city2)
 
     try:
-        return haversine(city1_coordinates, city2_coordinates, unit=Unit.KILOMETERS)
+        return haversine_distance(city1_coordinates, city2_coordinates, unit=Unit.KILOMETERS)
     except Exception as e:
         print(e)
         raise Exception('Error calculating distance')

@@ -26,19 +26,27 @@ functions:
     handler: src/interfaces/get_city.handler
     events:
       - httpApi:
-          path: /
+          path: /city
           method: get
   getDistance:
     handler: src/interfaces/get_distance.handler
     events:
       - httpApi:
-          path: /
+          path: /distance
           method: post
 
 plugins:
   - serverless-offline
   - serverless-python-requirements
 
+package:
+  individually: true
+  excludeDevDependencies: false
+  patterns:
+    - '!**'
+    - '!*/**/__pycache__'
+    - 'src/**'
+    - '!test.json'
 
 custom:
   pythonRequirements:

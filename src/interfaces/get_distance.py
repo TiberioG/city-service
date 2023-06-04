@@ -19,6 +19,7 @@ def handler(event, context):
             'body':
                 json.dumps(return_body)
         }
+    # todo add more specific exceptions
     except Exception as e:
         print(e)
         return {
