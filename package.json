@@ -1,8 +1,9 @@
 {
   "scripts": {
-    "start:local": "sls offline"
+    "start:local": "export AWS_PROFILE=personal && sls offline"
   },
   "devDependencies": {
-    "serverless-offline": "^12.0.4"
+    "serverless-offline": "^12.0.4",
+    "serverless-python-requirements": "^6.0.0"
   }
 }

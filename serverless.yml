@@ -12,10 +12,15 @@ provider:
   runtime: python3.9
   profile: ${param:profile}
   region: ${param:region}
-
-  environment:
-    AWS_REGION: ${param:region}
-
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+              - "secretsmanager:GetSecretValue"
+          Resource: "*"
+  httpApi:
+    cors: true
 functions:
   getCity:
     handler: src/interfaces/get_city.handler
@@ -32,3 +37,11 @@ functions:
 
 plugins:
   - serverless-offline
+  - serverless-python-requirements
+
+
+custom:
+  pythonRequirements:
+    usePoetry: true
+    dockerizePip: non-linux
+    slim: true

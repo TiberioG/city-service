@@ -4,6 +4,7 @@ import boto3
 import os
 from botocore.exceptions import ClientError
 
+region = os.getenv('AWS_REGION') or 'eu-central-1'
 
 def get_secret(secret_name: str) -> str | None:
     """
@@ -14,7 +15,7 @@ def get_secret(secret_name: str) -> str | None:
     session = boto3.session.Session()
     client = session.client(
         service_name='secretsmanager',
-        region_name=os.getenv('AWS_REGION')
+        region_name=region
     )
     try:
         get_secret_value_response = client.get_secret_value(
@@ -24,4 +25,5 @@ def get_secret(secret_name: str) -> str | None:
 
         return get_secret_value_response.get('SecretString')
     except ClientError as e:
+        print(e)
         return None

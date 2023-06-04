@@ -1,5 +1,8 @@
 import json
 
+import boto3
+from botocore.exceptions import ClientError
+
 from src.infrastructure.city_api.city_client import get_city_by_name
 
 
